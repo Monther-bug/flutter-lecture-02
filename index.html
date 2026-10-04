@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 02 · Installing Flutter &amp; Your First Project</title>
+  <meta name="description" content="Mobile App Development with Flutter, Lecture 02: installing Flutter on Windows and macOS, and creating your first project.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ============ Icon sprite ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flutter-logo" viewBox="0 0 166 210">
+    <path fill="#44D1FD" d="M10 101 100 11h56L38 129z"/>
+    <path fill="#1FBCFD" d="M51 150 100 102h56l-77 76z"/>
+    <path fill="#08589C" d="M79 178 107 150l49 49h-56z"/>
+  </symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-windows" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9"/><path d="M2 19.5 4 16h16l2 3.5a1 1 0 0 1-.9 1.5H2.9a1 1 0 0 1-.9-1.5z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.4 9a16 16 0 0 1 21.2 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><path d="M12 20h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.3 9 5.1"/><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><path d="M12 19h8"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><path d="m4 4 7 17 2.5-7.5L21 11z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-chrome" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9l4.6-7.9"/></symbol>
+  <symbol id="i-cable" viewBox="0 0 24 24"><path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v2"/><path d="M19 15V6.5a3.5 3.5 0 0 0-7 0v11a3.5 3.5 0 0 1-7 0V9"/><path d="M3 9V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4z"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12 7c-1.5-1.3-4.5-1.6-6 .5-1.6 2.3-1 6.6 1.3 9.9 1 1.4 2 2.6 3.2 2.5.9 0 1.2-.6 1.5-.6s.6.6 1.5.6c1.2.1 2.2-1.1 3.2-2.5 2.3-3.3 2.9-7.6 1.3-9.9-1.5-2.1-4.5-1.8-6-.5z"/><path d="M12 7c0-2 1-3.5 3-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+</svg>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<main class="deck">
+
+<!-- =========================================================
+     01 · Title
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame frame--title">
+    <div class="stagger">
+      <p class="kicker">Lecture 02 · Mobile App Development</p>
+      <h1 class="hero">Installing <span class="grad-text">Flutter</span><br>&amp; Your First Project</h1>
+      <p class="lead lead--hero">From an empty laptop to a running app, step by step.</p>
+      <div class="chips">
+        <span class="chip"><span class="avatar">MI</span>Eng. Monther Ibrahim</span>
+        <span class="chip"><span class="avatar">M</span>Muhammad, M.Sc.</span>
+        <span class="chip">Fall 2026</span>
+      </div>
+      <p class="keys"><kbd>→</kbd> next &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>N</kbd> notes &nbsp;·&nbsp; <kbd>T</kbd> theme</p>
+    </div>
+    <div class="title-right" aria-hidden="true">
+      <div class="logo-glow"></div>
+      <svg class="logo logo--hero"><use href="#flutter-logo"/></svg>
+      <div class="term term--title">
+        <div class="term__bar"><i></i><i></i><i></i><span>Terminal</span></div>
+        <pre class="stagger"><span class="ln"><span class="t-p">$</span> flutter doctor</span><span class="ln"><span class="t-ok">[✓]</span> Flutter (Channel stable, 3.47.6)</span><span class="ln"><span class="t-ok">[✓]</span> Android toolchain</span><span class="ln"><span class="t-ok">[✓]</span> Connected device (2 available)</span><span class="ln"><span class="t-ok">•</span> No issues found!</span><span class="ln"><span class="t-p">$</span> flutter create my_first_app</span><span class="ln"><span class="t-b">All done!</span> <span class="cursor"></span></span></pre>
+      </div>
+    </div>
+  </div></div>
+  <aside class="notes">
+    <p>Welcome back. Today is hands-on: by the end, Flutter should run on every laptop in the room.</p>
+    <p>Ask everyone to open their laptops and plug in chargers. Students who already installed Flutter can help their neighbours.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     02 · Today's plan
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Today</p>
+      <h2 class="title">Today's plan</h2>
+      <p class="lead">Last lecture: <b>what</b> Flutter is. Today: make it run on <b>your</b> laptop.</p>
+    </header>
+    <div class="body" style="grid-template-rows: 1fr auto;">
+      <div class="journey stagger">
+        <div class="stop">
+          <div class="stop__dot"><svg class="ico"><use href="#i-download"/></svg><span class="stop__n">1</span></div>
+          <h3>The toolkit</h3>
+          <p>What we install and why</p>
+        </div>
+        <div class="stop">
+          <div class="stop__dot"><svg class="ico"><use href="#i-windows"/></svg><span class="stop__n">2</span></div>
+          <h3>Windows setup</h3>
+          <p>Step by step, with pictures</p>
+        </div>
+        <div class="stop">
+          <div class="stop__dot"><svg class="ico"><use href="#i-laptop"/></svg><span class="stop__n">3</span></div>
+          <h3>On a Mac</h3>
+          <p>3 simple steps</p>
+        </div>
+        <div class="stop">
+          <div class="stop__dot"><svg class="ico"><use href="#i-sparkles"/></svg><span class="stop__n">4</span></div>
+          <h3>Let AI help</h3>
+          <p>A prompt that installs it for you</p>
+        </div>
+        <div class="stop">
+          <div class="stop__dot"><svg class="ico"><use href="#i-play"/></svg><span class="stop__n">5</span></div>
+          <h3>Your first app</h3>
+          <p>Create it, run it, hot reload</p>
+        </div>
+      </div>
+      <div class="callout callout--ok goal">
+        <svg class="ico"><use href="#i-target"/></svg>
+        <div><b>Goal for today:</b> <code>flutter doctor</code> shows green ticks, and your first Flutter app runs on your laptop.</div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Walk through the five stops. Be honest: setup is the most annoying part of the whole course. After today it gets fun.</p>
+    <p>Mac users: wait for stop 3, but the Windows slides still explain each tool.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     03 · What we're installing
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Step 0 · The toolkit</p>
+      <h2 class="title">What we're installing</h2>
+      <p class="lead">Four tools. Each one has one job.</p>
+    </header>
+    <div class="body" style="grid-template-rows: 1fr auto;">
+      <div class="body tools stagger" style="gap:1.4cqw">
+        <article class="card tool">
+          <span class="tool__n">01</span>
+          <div class="itile"><svg class="ico"><use href="#i-git"/></svg></div>
+          <h3>Git</h3>
+          <p>Downloads Flutter for you and keeps track of your code's history.</p>
+          <span class="tool__src">git-scm.com</span>
+        </article>
+        <article class="card tool">
+          <span class="tool__n">02</span>
+          <div class="itile"><svg class="ico"><use href="#i-code"/></svg></div>
+          <h3>VS Code + Flutter extension</h3>
+          <p>Where you write code. The extension adds Flutter commands and buttons.</p>
+          <span class="tool__src">code.visualstudio.com</span>
+        </article>
+        <article class="card card--hl tool">
+          <span class="tool__n">03</span>
+          <div class="itile"><svg class="logo"><use href="#flutter-logo"/></svg></div>
+          <h3>Flutter SDK</h3>
+          <p>Flutter itself: the <code>flutter</code> command, Dart and all the widgets.</p>
+          <span class="badge">SDK = Software Development Kit</span>
+          <span class="tool__src">docs.flutter.dev (one zip file)</span>
+        </article>
+        <article class="card tool">
+          <span class="tool__n">04</span>
+          <div class="itile"><svg class="ico"><use href="#i-phone"/></svg></div>
+          <h3>Android Studio</h3>
+          <p>Brings the Android SDK and the <b>emulator</b>: a virtual phone on your laptop.</p>
+          <span class="tool__src">developer.android.com/studio</span>
+        </article>
+      </div>
+      <div class="card reqs">
+        <h4>Before you start</h4>
+        <div class="req"><svg class="ico"><use href="#i-laptop"/></svg>Windows 10/11 (64-bit) or macOS</div>
+        <div class="req"><svg class="ico"><use href="#i-cpu"/></svg>8 GB RAM (16 GB is better)</div>
+        <div class="req"><svg class="ico"><use href="#i-disk"/></svg>About 15 GB free disk space</div>
+        <div class="req"><svg class="ico"><use href="#i-wifi"/></svg>Good internet: several GB to download</div>
+        <div class="req"><svg class="ico"><use href="#i-shield"/></svg>Admin access on your laptop</div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>An analogy: Git is the delivery truck that brings Flutter. VS Code is your workbench. The Flutter SDK is the toolbox. Android Studio is the phone lab.</p>
+    <p>Check disk space now. Anyone with less than about 15 GB free should clean up first. The downloads are big, so start Android Studio downloading on good Wi-Fi.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     04 · Windows · Step 1 · Git + VS Code
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 1</p>
+      <h2 class="title">Install Git and VS Code</h2>
+      <p class="lead">Two normal installers. Click <b>Next</b> until they finish.</p>
+    </header>
+    <div class="body gitvs stagger">
+      <article class="card stepcard">
+        <div class="stepcard__top">
+          <div class="itile"><svg class="ico"><use href="#i-git"/></svg></div>
+          <div><span class="badge">Git</span><h3>git-scm.com/downloads/win</h3></div>
+        </div>
+        <figure class="shot shot--crop" style="--crop-h: 13cqw;">
+          <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url"><svg class="ico"><use href="#i-lock"/></svg>git-scm.com/downloads/win</span></div>
+          <img src="assets/screens/git-download-windows.jpg" alt="The Git for Windows download page with the 'Click here to download' link highlighted">
+        </figure>
+        <ol class="steps">
+          <li><span>Click <b>Click here to download</b></span></li>
+          <li><span>Run the installer and keep <b>all the defaults</b></span></li>
+        </ol>
+      </article>
+      <article class="card stepcard">
+        <div class="stepcard__top">
+          <div class="itile"><svg class="ico"><use href="#i-code"/></svg></div>
+          <div><span class="badge">VS Code</span><h3>code.visualstudio.com</h3></div>
+        </div>
+        <ol class="steps">
+          <li><span>Download and install VS Code</span></li>
+          <li><span>Open Extensions: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd></span></li>
+          <li><span>Search <b>Flutter</b> and click <b>Install</b></span></li>
+        </ol>
+        <div class="ext" aria-hidden="true">
+          <svg class="logo"><use href="#flutter-logo"/></svg>
+          <div>
+            <h4>Flutter</h4>
+            <small><b>Dart Code</b> · Flutter support and debugger for Visual Studio Code</small>
+          </div>
+          <span class="btn-mock">Install</span>
+        </div>
+        <p class="small muted">The <b>Dart</b> extension installs automatically with it.</p>
+      </article>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Live demo: download and install Git with the defaults, then VS Code and the Flutter extension.</p>
+    <p>The extension's publisher is "Dart Code". That's the official one. Students who already have Git or VS Code can skip ahead.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     05 · Windows · Step 2 · Download the SDK
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 2</p>
+      <h2 class="title">Download the Flutter SDK</h2>
+      <p class="lead">The whole SDK is <b>one zip file</b> from the official Flutter website.</p>
+    </header>
+    <div class="body split">
+      <div>
+        <figure class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url"><svg class="ico"><use href="#i-lock"/></svg>docs.flutter.dev/install/manual</span></div>
+          <img src="assets/screens/flutter-download-windows.jpg" alt="The Flutter 'Install manually' page with the flutter_windows_3.47.6-stable.zip download button highlighted">
+        </figure>
+        <p class="shot-src">Real screenshot · docs.flutter.dev</p>
+      </div>
+      <ol class="steps bigsteps stagger">
+        <li><span>Open <span class="path">docs.flutter.dev/install/manual</span></span></li>
+        <li><span>The page picks <b>Windows</b> for you</span></li>
+        <li><span>Click the blue button <b>flutter_windows_…zip</b></span></li>
+        <li><span>Wait. It's a big file, so use good Wi-Fi</span></li>
+      </ol>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Show the real page. The site detects the operating system, so Windows students see the Windows zip. The version number (3.47.6 today) changes over time, and that's fine: always take the newest stable one.</p>
+    <p>Tell students to download only from docs.flutter.dev. Never use random mirror sites.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     06 · Windows · Step 3 · Extract
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 3</p>
+      <h2 class="title">Extract the zip to <code>C:\develop</code></h2>
+      <p class="lead">A short, simple folder with no spaces and no Arabic letters.</p>
+    </header>
+    <div class="body extract">
+      <div class="mockcol">
+        <div class="w11" aria-hidden="true">
+          <div class="w11__title"><svg class="ico fi fi--dir"><use href="#i-folder"/></svg>Downloads<span class="ctl"><span>─</span><span>▢</span><span>✕</span></span></div>
+          <div class="ex-bar">
+            <span class="ex-nav">← → ↑</span>
+            <div class="ex-addr"><span class="sep">›</span> This PC <span class="sep">›</span> Downloads</div>
+            <div class="ex-search"><svg class="ico"><use href="#i-search"/></svg>Search</div>
+          </div>
+          <div class="ex-files" style="min-height: 15.5cqw;">
+            <div class="r h"><span></span><span>Name</span><span>Type</span></div>
+            <div class="r sel"><svg class="ico fi fi--zip"><use href="#i-file"/></svg><span>flutter_windows_3.47.6-stable.zip</span><span class="t">Compressed (zipped)</span></div>
+            <div class="r"><svg class="ico fi fi--file"><use href="#i-file"/></svg><span>Git-2.56.0-64-bit.exe</span><span class="t">Application</span></div>
+            <div class="r"><svg class="ico fi fi--file"><use href="#i-file"/></svg><span>VSCodeUserSetup-x64.exe</span><span class="t">Application</span></div>
+          </div>
+          <div class="ctx" style="left: 19cqw; top: 9.4cqw;">
+            <div><svg class="ico"><use href="#i-file"/></svg>Open</div>
+            <div class="hot"><svg class="ico"><use href="#i-folder"/></svg><b>Extract All…</b><i class="pin">1</i></div>
+            <div><svg class="ico"><use href="#i-copy"/></svg>Copy as path</div>
+            <hr>
+            <div><svg class="ico"><use href="#i-info"/></svg>Properties</div>
+          </div>
+        </div>
+        <p class="cap"><span class="n">1</span> Right-click the zip → <b>Extract All…</b></p>
+      </div>
+      <div class="mockcol">
+        <div class="w11 wiz" aria-hidden="true">
+          <div class="w11__title">← &nbsp;Extract Compressed (Zipped) Folders<span class="ctl"><span>✕</span></span></div>
+          <div class="w11__body">
+            <h4>Select a Destination and Extract Files</h4>
+            <label>Files will be extracted to this folder:</label>
+            <div class="field">
+              <div class="winput hot">C:\develop<i class="pin">2</i></div>
+              <span class="wb">Browse…</span>
+            </div>
+            <div class="wcheck"><i>✓</i>Show extracted files when complete</div>
+          </div>
+          <div class="w11__foot"><span class="wb wb--pri hot">Extract<i class="pin">3</i></span><span class="wb">Cancel</span></div>
+        </div>
+        <p class="cap"><span class="n">2</span> Replace the folder with <span class="path">C:\develop</span> <span class="n">3</span> Click <b>Extract</b></p>
+      </div>
+      <div class="row-bottom">
+        <div class="callout callout--ok"><svg class="ico"><use href="#i-check-circle"/></svg><div><b>Result:</b> Flutter is now in <span class="path">C:\develop\flutter</span></div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>Extracting takes <b>a few minutes</b>. Don't close the window.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>The most common mistake: Windows suggests a long folder like <code>Downloads\flutter_windows_3.47.6-stable</code>. Delete all of it and type <code>C:\develop</code>. Windows creates the folder.</p>
+    <p>Why C:\develop? It has no spaces and no Arabic letters, and doesn't need admin rights. Never use C:\Program Files.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     07 · Windows · Step 4 · Copy the bin path
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 4</p>
+      <h2 class="title">Copy the path of the <code>bin</code> folder</h2>
+      <p class="lead"><b>bin</b> holds the <code>flutter</code> command. Windows needs to know where it is.</p>
+    </header>
+    <div class="body split--wide-right">
+      <div class="mockcol">
+        <div class="w11" aria-hidden="true">
+          <div class="w11__title"><svg class="ico fi fi--dir"><use href="#i-folder"/></svg>bin<span class="ctl"><span>─</span><span>▢</span><span>✕</span></span></div>
+          <div class="ex-bar">
+            <span class="ex-nav">← → ↑</span>
+            <div class="ex-addr is-edit hot"><span class="selected">C:\develop\flutter\bin</span><i class="pin">2</i></div>
+            <div class="ex-search"><svg class="ico"><use href="#i-search"/></svg>Search</div>
+          </div>
+          <div class="ex-files">
+            <div class="r h"><span></span><span>Name</span><span>Type</span></div>
+            <div class="r"><svg class="ico fi fi--dir"><use href="#i-folder"/></svg><span>internal</span><span class="t">File folder</span></div>
+            <div class="r"><svg class="ico fi fi--file"><use href="#i-file"/></svg><span>dart</span><span class="t">File</span></div>
+            <div class="r"><svg class="ico fi fi--bat"><use href="#i-file"/></svg><span>dart.bat</span><span class="t">Windows Batch File</span></div>
+            <div class="r"><svg class="ico fi fi--file"><use href="#i-file"/></svg><span>flutter</span><span class="t">File</span></div>
+            <div class="r sel"><svg class="ico fi fi--bat"><use href="#i-file"/></svg><span>flutter.bat</span><span class="t">Windows Batch File</span></div>
+          </div>
+        </div>
+        <p class="cap">Inside <b>bin</b> you'll see <b>flutter.bat</b>. That's how you know you're in the right folder.</p>
+      </div>
+      <div class="side">
+        <ol class="steps bigsteps bigsteps--pins stagger">
+          <li><span>Open <span class="path">C:\develop\flutter\bin</span></span></li>
+          <li><span>Click the <b>address bar</b> at the top. The path turns blue</span></li>
+          <li><span>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy it</span></li>
+        </ol>
+        <div class="card copied">
+          <small>You copied</small>
+          <code>C:\develop\flutter\bin</code>
+        </div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>Copy the <b>bin</b> folder, not just <b>flutter</b>.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Open the folder: C:\develop → flutter → bin. Clicking an empty spot in the address bar turns the breadcrumbs into plain text that's already selected. Ctrl+C copies it.</p>
+    <p>Avoid right-click → "Copy as path". It adds quotation marks, which we don't want in PATH.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     08 · Windows · Step 5 · Open Environment Variables
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 5</p>
+      <h2 class="title">Open Environment Variables</h2>
+      <p class="lead"><b>Path</b> is Windows' list of folders where it looks for commands. We'll add ours to it.</p>
+    </header>
+    <div class="body envs">
+      <div class="mockcol">
+        <div class="w11 wsearch" aria-hidden="true">
+          <div class="wsearch__box hot"><svg class="ico"><use href="#i-search"/></svg>environment<span class="cursor" style="background:#1B1B1B;width:1px;"></span><i class="pin">1</i></div>
+          <h6>Best match</h6>
+          <div class="wres hot"><span class="cp-ico"><svg class="ico"><use href="#i-gear"/></svg></span><div>Edit environment variables for your account<small>Control panel</small></div><i class="pin">2</i></div>
+          <h6>Settings</h6>
+          <div class="wres dim"><span class="cp-ico cp-ico--gray"><svg class="ico"><use href="#i-gear"/></svg></span><div>Edit the system environment variables<small>Control panel</small></div></div>
+        </div>
+        <p class="cap"><span class="n">1</span> Press the <kbd>⊞ Win</kbd> key, type <b>environment</b></p>
+        <p class="cap"><span class="n">2</span> Click <b>…for your account</b></p>
+      </div>
+      <div class="arrow-mid"><svg class="ico"><use href="#i-arrow-right"/></svg></div>
+      <div class="mockcol">
+        <div class="w11" aria-hidden="true">
+          <div class="w11__title">Environment Variables<span class="ctl"><span>✕</span></span></div>
+          <div class="w11__body">
+            <h5>User variables for student</h5>
+            <div class="wlist">
+              <div class="r h"><span>Variable</span><span>Value</span></div>
+              <div class="r"><span>OneDrive</span><span>C:\Users\student\OneDrive</span></div>
+              <div class="r sel hot"><span><b>Path</b></span><span>C:\Users\student\AppData\Local\Microsoft\WindowsApps;…</span><i class="pin pin--left">3</i></div>
+              <div class="r"><span>TEMP</span><span>C:\Users\student\AppData\Local\Temp</span></div>
+              <div class="r"><span>TMP</span><span>C:\Users\student\AppData\Local\Temp</span></div>
+            </div>
+            <div class="wbtns"><span class="wb">New…</span><span class="wb hot">Edit…<i class="pin">4</i></span><span class="wb">Delete</span></div>
+            <h5 class="dim" style="margin-top:.9cqw;">System variables</h5>
+            <div class="wlist dim">
+              <div class="r h"><span>Variable</span><span>Value</span></div>
+              <div class="r"><span>OS</span><span>Windows_NT</span></div>
+            </div>
+          </div>
+          <div class="w11__foot"><span class="wb wb--pri">OK</span><span class="wb">Cancel</span></div>
+        </div>
+        <p class="cap"><span class="n">3</span> In the <b>top</b> list, click <b>Path</b> <span class="n">4</span> Click <b>Edit…</b></p>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>"Edit environment variables for your account" opens this window directly and doesn't need admin rights. If a student opens "Edit the system environment variables" instead, they need to click the "Environment Variables…" button at the bottom first.</p>
+    <p>Use the <b>top</b> list (User variables). Leave System variables alone.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     09 · Windows · Step 6 · Paste into Path
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 6</p>
+      <h2 class="title">Paste the path and save</h2>
+      <p class="lead">Add one new line to the list. That's it!</p>
+    </header>
+    <div class="body split--wide-right">
+      <div class="mockcol">
+        <div class="w11" aria-hidden="true">
+          <div class="w11__title">Edit environment variable<span class="ctl"><span>✕</span></span></div>
+          <div class="w11__body" style="display:grid; grid-template-columns: 1fr auto; gap: 1cqw;">
+            <div class="wlist wlist--one" style="min-height: 16cqw;">
+              <div class="r"><span>%USERPROFILE%\AppData\Local\Microsoft\WindowsApps</span></div>
+              <div class="r"><span>C:\Users\student\AppData\Local\Programs\Microsoft VS Code\bin</span></div>
+              <div class="r edit hot"><span>C:\develop\flutter\bin<span class="caret"></span></span><i class="pin">2</i></div>
+            </div>
+            <div style="display:grid; gap:.55cqw; align-content:start;">
+              <span class="wb hot">New<i class="pin">1</i></span>
+              <span class="wb">Edit</span>
+              <span class="wb">Browse…</span>
+              <span class="wb">Delete</span>
+              <span class="wb dim">Move Up</span>
+              <span class="wb dim">Move Down</span>
+            </div>
+          </div>
+          <div class="w11__foot"><span class="wb wb--pri hot">OK<i class="pin">3</i></span><span class="wb">Cancel</span></div>
+        </div>
+      </div>
+      <div class="side">
+        <ol class="steps bigsteps bigsteps--pins stagger">
+          <li><span>Click <b>New</b></span></li>
+          <li><span>Paste with <kbd>Ctrl</kbd> + <kbd>V</kbd></span></li>
+          <li><span>Click <b>OK</b>, then <b>OK</b> again</span></li>
+          <li><span>Close PowerShell, open a <b>new</b> one, and check:</span></li>
+        </ol>
+        <div class="term">
+          <div class="term__bar"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+          <pre><span class="t-p">PS&gt;</span> flutter --version
+<span class="t-ok">Flutter 3.47.6 • channel stable</span></pre>
+        </div>
+        <p class="small muted">The first run is slow because Flutter downloads Dart. That's normal.</p>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Old windows don't see the new PATH. That's why students must open a <b>new</b> PowerShell (and restart VS Code).</p>
+    <p>If <code>flutter</code> is "not recognized": reopen this dialog and check the line says exactly <code>C:\develop\flutter\bin</code>.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     10 · Windows · Step 7 · Android Studio
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 7</p>
+      <h2 class="title">Install Android Studio</h2>
+      <p class="lead">It brings the Android tools and the emulator (a virtual phone).</p>
+    </header>
+    <div class="body studio">
+      <div class="side" style="gap:1.1cqw;">
+        <figure class="shot shot--crop" style="--crop-h: 13.5cqw;">
+          <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url"><svg class="ico"><use href="#i-lock"/></svg>developer.android.com/studio</span></div>
+          <img src="assets/screens/android-studio-download.jpg" alt="The Android Studio download page with the Download button highlighted">
+        </figure>
+        <ol class="steps stagger">
+          <li><span>Download and install it (keep clicking <b>Next</b>)</span></li>
+          <li><span>Open it and choose the <b>Standard</b> setup</span></li>
+          <li><span><b>More Actions</b> → <b>SDK Manager</b> → <b>SDK Tools</b>: tick <b>Command-line Tools</b> → Apply</span></li>
+          <li><span>Accept the licenses in PowerShell (type <b>y</b>)</span></li>
+        </ol>
+      </div>
+      <div class="side" style="gap:1.1cqw;">
+        <div class="win" aria-hidden="true">
+          <div class="win__title"><b>Settings</b> › Languages &amp; Frameworks › Android SDK</div>
+          <div class="tabs"><span class="tab">SDK Platforms</span><span class="tab is-on">SDK Tools</span></div>
+          <ul class="checks">
+            <li><span class="cbox"><svg class="ico"><use href="#i-check"/></svg></span>Android SDK Build-Tools</li>
+            <li class="is-key"><span class="cbox"><svg class="ico"><use href="#i-check"/></svg></span>Android SDK Command-line Tools<span class="flag">Tick this!</span></li>
+            <li><span class="cbox"><svg class="ico"><use href="#i-check"/></svg></span>Android Emulator</li>
+            <li><span class="cbox"><svg class="ico"><use href="#i-check"/></svg></span>Android SDK Platform-Tools</li>
+          </ul>
+          <div class="win__foot"><span class="wbtn">Cancel</span><span class="wbtn wbtn--pri">Apply</span></div>
+        </div>
+        <div class="term">
+          <div class="term__bar"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+          <pre><span class="t-p">PS&gt;</span> flutter doctor --android-licenses
+<span class="t-ok">All SDK package licenses accepted.</span></pre>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Android Studio is a big download, and the first setup downloads even more. Start it early.</p>
+    <p>The Standard setup installs most tools, but not the Command-line Tools. Without them <code>flutter doctor</code> shows "cmdline-tools component is missing". The license command asks several times: type y and press Enter each time.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     11 · Windows · Step 8 · Device
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Windows · Step 8</p>
+      <h2 class="title">Get a phone to run your app on</h2>
+      <p class="lead">Pick one. You can always add the other later.</p>
+    </header>
+    <div class="body devices">
+      <article class="card option">
+        <div class="option__top">
+          <div class="itile"><svg class="ico"><use href="#i-laptop"/></svg></div>
+          <div><span class="badge">Option A</span><h3>Emulator: a virtual phone</h3></div>
+        </div>
+        <ol class="steps">
+          <li><span>Android Studio → <b>More Actions</b> → <b>Virtual Device Manager</b></span></li>
+          <li><span>Click <b>+</b> → <b>Phone</b> → pick a <b>Pixel</b> → Next</span></li>
+          <li><span>Download a system image → Next</span></li>
+          <li><span><b>Additional settings</b> → Graphics: <b>Hardware</b> → Finish</span></li>
+          <li><span>Press <b>▶</b> to start your virtual phone</span></li>
+        </ol>
+      </article>
+      <article class="card card--hl option">
+        <div class="option__top">
+          <div class="itile"><svg class="ico"><use href="#i-phone"/></svg></div>
+          <div><span class="badge badge--ok">Option B · faster on weak laptops</span><h3>Your own Android phone</h3></div>
+        </div>
+        <ol class="steps">
+          <li><span>Settings → <b>About phone</b> → tap <b>Build number</b> 7 times</span></li>
+          <li><span>Settings → <b>Developer options</b> → turn on <b>USB debugging</b></span></li>
+          <li><span>Connect with a data cable and tap <b>Allow</b> on the phone</span></li>
+          <li><span>Check: <code>flutter devices</code> lists your phone</span></li>
+        </ol>
+      </article>
+      <div class="tips">
+        <div class="callout callout--info">
+          <svg class="ico"><use href="#i-chrome"/></svg>
+          <div><b>Chrome</b> works as a device too, with no setup at all. It's great for a quick first test.</div>
+        </div>
+        <div class="callout callout--warn">
+          <svg class="ico"><use href="#i-alert"/></svg>
+          <div>Emulator very slow? Turn on <b>virtualization</b> in your BIOS, or use your phone instead.</div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Laptops with less than 8 GB of RAM should use their own phone: it's faster and frees memory.</p>
+    <p>Build number location varies. On Samsung it's About phone → Software information → Build number. On Xiaomi, tap "OS version" instead.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     08 · flutter doctor
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Checkpoint</p>
+      <h2 class="title">Check everything with <code>flutter doctor</code></h2>
+      <p class="lead">Your setup's health check. Run it again after every fix.</p>
+    </header>
+    <div class="body doctor">
+      <div class="term" style="align-self:start;">
+        <div class="term__bar"><i></i><i></i><i></i><span>Windows PowerShell</span><span class="grow"></span><span>example, shortened</span></div>
+        <pre class="stagger"><span class="ln"><span class="t-p">PS&gt;</span> flutter doctor</span><span class="ln t-dim">Doctor summary (to see all details, run flutter doctor -v):</span><span class="ln"><span class="t-ok">[✓]</span> Flutter (Channel stable, 3.47.6, on Microsoft Windows 11)</span><span class="ln"><span class="t-ok">[✓]</span> Windows Version (11 Home 64-bit)</span><span class="ln"><span class="t-ok">[✓]</span> Android toolchain - develop for Android devices</span><span class="ln"><span class="t-ok">[✓]</span> Chrome - develop for the web</span><span class="ln"><span class="t-bad">[✗]</span> Visual Studio - develop Windows apps</span><span class="ln">    <span class="t-bad">✗</span> <span class="t-dim">Visual Studio not installed; this is necessary to develop Windows apps.</span></span><span class="ln"><span class="t-ok">[✓]</span> Android Studio</span><span class="ln"><span class="t-ok">[✓]</span> VS Code</span><span class="ln"><span class="t-ok">[✓]</span> Connected device (3 available)</span><span class="ln"><span class="t-ok">[✓]</span> Network resources</span><span class="ln"> </span><span class="ln"><span class="t-warn">!</span> Doctor found issues in 1 category.</span></pre>
+      </div>
+      <div class="legend stagger">
+        <div class="legend__row"><span class="legend__sym t-ok">[✓]</span><span><b>Ready</b></span></div>
+        <div class="legend__row"><span class="legend__sym t-warn">[!]</span><span><b>Works</b>, but has a warning</span></div>
+        <div class="legend__row"><span class="legend__sym t-bad">[✗]</span><span><b>Missing</b>: read the line under it</span></div>
+        <div class="callout callout--ok">
+          <svg class="ico"><use href="#i-target"/></svg>
+          <div><b>Your goal:</b> ✓ on <b>Flutter</b>, <b>Android toolchain</b> and <b>Connected device</b>.</div>
+        </div>
+        <div class="callout callout--info">
+          <svg class="ico"><use href="#i-info"/></svg>
+          <div><b>Visual Studio ✗?</b> Ignore it. It's only for Windows desktop apps, not phones.</div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Run <code>flutter doctor</code> live and read it from top to bottom.</p>
+    <p>Every ✗ comes with a message that says exactly what to do. Teach students to read that message before asking for help. Add <code>-v</code> for full details.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     13 · macOS · simple
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">macOS</p>
+      <h2 class="title">On a Mac? 3 simple steps</h2>
+    </header>
+    <div class="body mac">
+      <div>
+        <figure class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url"><svg class="ico"><use href="#i-lock"/></svg>docs.flutter.dev/install/manual</span></div>
+          <img src="assets/screens/flutter-download-mac.jpg" alt="The Flutter manual install page on macOS showing the Apple Silicon and Intel download buttons">
+        </figure>
+        <p class="shot-src">Real screenshot · docs.flutter.dev</p>
+      </div>
+      <div class="side">
+        <ol class="steps bigsteps stagger" style="font-size:1.38cqw; gap:1.1cqw;">
+          <li><span><b>Download</b> the zip for your chip: <b>Apple Silicon</b> (M1, M2…) or <b>Intel</b></span></li>
+          <li><span><b>Double-click</b> the zip. Make a folder called <span class="path">develop</span> in your home folder and drag <b>flutter</b> into it</span></li>
+          <li><span>Open <b>Terminal</b>, paste this line, press <kbd>Enter</kbd>:</span></li>
+        </ol>
+        <div class="term">
+          <div class="term__bar"><i></i><i></i><i></i><span>Terminal</span></div>
+          <pre><span class="t-p">$</span> echo 'export PATH="$HOME/develop/flutter/bin:$PATH"' &gt;&gt; ~/.zprofile</pre>
+        </div>
+        <p class="small muted">Then open a new Terminal and run <code>flutter doctor</code>. Android Studio: same steps as Windows.</p>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Check the chip: Apple menu → About This Mac. "Apple M…" means Apple Silicon (the arm64 zip). Safari may unzip the file automatically; then the flutter folder is already in Downloads.</p>
+    <p>If macOS asks to install "command line developer tools", click Install. That gives them Git. iPhone apps need Xcode, which is optional and can wait.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     11 · AI agent prompt
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Shortcut</p>
+      <h2 class="title">Let an AI agent install it for you</h2>
+      <p class="lead">Agents like <b>Claude Code</b>, <b>Codex</b>, <b>Gemini CLI</b> or <b>Cursor</b> can run the setup for you. Paste this prompt:</p>
+    </header>
+    <div class="body ai">
+      <div class="term prompt">
+        <div class="term__bar">
+          <i></i><i></i><i></i><span>flutter-install-prompt.md</span><span class="grow"></span>
+          <button class="copy-btn" type="button" data-copy="#agent-prompt"><svg class="ico"><use href="#i-copy"/></svg><span class="copy-label">Copy prompt</span></button>
+        </div>
+<pre id="agent-prompt">You are a patient setup assistant helping a complete beginner. <span class="pk">Goal:</span> install Flutter for Android development on this computer.
+
+<span class="pn">1.</span> Detect my OS (Windows or macOS) and CPU (x64 or ARM). Check what's already installed (git, flutter, VS Code, Android Studio) and keep what works.
+<span class="pn">2.</span> Use official sources only: git-scm.com, docs.flutter.dev, developer.android.com, code.visualstudio.com.
+<span class="pn">3.</span> Download the latest STABLE Flutter SDK zip from docs.flutter.dev/install/manual, extract it to C:\develop\flutter (Windows) or ~/develop/flutter (macOS), and add its bin folder to my PATH.
+<span class="pn">4.</span> Guide me through Android Studio's SDK Manager (SDK Platform, Build-Tools, Command-line Tools, Platform-Tools, Emulator), then run: <span class="pc">flutter doctor --android-licenses</span>
+<span class="pn">5.</span> Run <span class="pc">flutter doctor -v</span>, fix everything that blocks Android development, and run it again. Skip Visual Studio (Windows desktop apps only).
+<span class="pn">6.</span> Prove it works: run <span class="pc">flutter create hello_flutter</span>, then run the app on an emulator, my phone, or Chrome.
+
+<span class="pk">Rules:</span> Ask me before any admin/sudo command or system change. Explain every step in simple words. When you finish, summarize what you installed, where, and what I still need to do by hand.</pre>
+      </div>
+      <div class="rules stagger">
+        <div class="callout callout--ok"><svg class="ico"><use href="#i-shield"/></svg><div><b>Read and approve</b> every command. Never "allow all" blindly.</div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>Agents make mistakes. <b>Learn the manual steps too.</b></div></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-mouse"/></svg><div>Android Studio's windows still need <b>your clicks</b>.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>The same prompt is in <code>flutter-install-prompt.md</code> next to this deck. Share it in the class group.</p>
+    <p>Stress that the agent runs commands on the student's own computer. They should read each command before approving it. An agent is a helper, not a replacement for understanding the steps we just did.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     12 · Common problems
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Troubleshooting</p>
+      <h2 class="title">Stuck? The 6 most common problems</h2>
+    </header>
+    <div class="body probs">
+      <table class="tbl tbl--probs">
+        <tbody>
+          <tr>
+            <td><span class="err">'flutter' is not recognized…</span></td>
+            <td>The Path line is wrong. It must be exactly <code>C:\develop\flutter\bin</code>. Then open a <b>new</b> PowerShell.</td>
+          </tr>
+          <tr>
+            <td><span class="err">cmdline-tools component is missing</span></td>
+            <td>Android Studio → SDK Manager → SDK Tools → tick <b>Android SDK Command-line Tools</b> → Apply.</td>
+          </tr>
+          <tr>
+            <td><span class="err">Android license status unknown</span></td>
+            <td>Run <code>flutter doctor --android-licenses</code> and press <b>y</b> for each license.</td>
+          </tr>
+          <tr>
+            <td><span class="muted">Emulator is very slow or won't start</span></td>
+            <td>Turn on <b>virtualization</b> in your BIOS, close heavy apps, or use your own phone.</td>
+          </tr>
+          <tr>
+            <td><span class="muted">Strange errors, and the folder path has spaces or Arabic letters</span></td>
+            <td>Move Flutter to <code>C:\develop\flutter</code> and fix the Path line to match.</td>
+          </tr>
+          <tr>
+            <td><span class="muted">Phone doesn't show up in <code>flutter devices</code></span></td>
+            <td>Use a <b>data</b> cable (not charge-only), tap <b>Allow USB debugging</b> on the phone, and try again.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout callout--info">
+        <svg class="ico"><use href="#i-search"/></svg>
+        <div><b>Still stuck?</b> Copy the <b>exact</b> error message and paste it into Google, an AI assistant, or our class group.</div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Go through these quickly. They cover most of the problems you'll see in the lab.</p>
+    <p>Teach the habit: always copy the exact error text. "It doesn't work" can't be debugged.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     13 · Create your first project
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Your first project</p>
+      <h2 class="title">Create your first Flutter project</h2>
+      <p class="lead">Two ways, same result. Pick the one you like.</p>
+    </header>
+    <div class="body create">
+      <article class="card card--hl stepcard">
+        <div class="stepcard__top">
+          <div class="itile"><svg class="ico"><use href="#i-code"/></svg></div>
+          <div><span class="badge badge--ok">Easiest</span><h3>With VS Code</h3></div>
+        </div>
+        <ol class="steps steps--tight">
+          <li><span><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> → <b>Flutter: New Project</b></span></li>
+          <li><span>Choose <b>Application</b></span></li>
+          <li><span>Pick a folder, e.g. <span class="path">Documents\flutter_projects</span></span></li>
+          <li><span>Type a name: <span class="path">my_first_app</span> → <kbd>Enter</kbd></span></li>
+          <li><span>Wait a moment. VS Code opens <span class="path">lib/main.dart</span></span></li>
+        </ol>
+      </article>
+      <article class="card stepcard">
+        <div class="stepcard__top">
+          <div class="itile"><svg class="ico"><use href="#i-terminal"/></svg></div>
+          <div><span class="badge">Pro way</span><h3>With the terminal</h3></div>
+        </div>
+        <div class="term">
+          <div class="term__bar"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+          <pre><span class="t-p">PS&gt;</span> flutter create my_first_app
+<span class="t-dim">Creating project my_first_app...</span>
+<span class="t-dim">…</span>
+<span class="t-ok">All done!</span>
+<span class="t-p">PS&gt;</span> cd my_first_app
+<span class="t-p">PS&gt;</span> flutter run</pre>
+        </div>
+        <p class="small muted"><code>create</code> makes the project · <code>cd</code> moves into it · <code>run</code> starts it</p>
+      </article>
+      <div class="card naming">
+        <h4>Naming rules</h4>
+        <span class="name-ok"><svg class="ico"><use href="#i-check"/></svg>my_first_app</span>
+        <span class="name-ok"><svg class="ico"><use href="#i-check"/></svg>hello_flutter2</span>
+        <span class="name-bad"><svg class="ico"><use href="#i-x"/></svg>My First App <small>spaces, capitals</small></span>
+        <span class="name-bad"><svg class="ico"><use href="#i-x"/></svg>my-first-app <small>dashes</small></span>
+        <span class="name-bad"><svg class="ico"><use href="#i-x"/></svg>1st_app <small>starts with a number</small></span>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Demo with VS Code live. The most common mistake is using spaces or capital letters in the name. Flutter will refuse it.</p>
+    <p>Rule of thumb: lowercase letters, numbers and underscores only, starting with a letter.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     14 · What's inside your project
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Your first project</p>
+      <h2 class="title">What's inside your project?</h2>
+      <p class="lead">Lots of folders, but you only need <b>one</b> for now.</p>
+    </header>
+    <div class="body inside">
+      <div class="card tree stagger">
+        <div class="row"><span><span class="d">my_first_app/</span></span><span></span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">android/</span></span><span class="note">Android-specific files</span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">ios/</span></span><span class="note">iPhone-specific files</span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">lib/</span></span><span class="note"></span></div>
+        <div class="row is-star"><span><span class="g">│  └─ </span><span class="f">main.dart</span></span><span class="note">★ your code lives here</span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">test/</span></span><span class="note">automated tests</span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">web/ windows/ …</span></span><span class="note">other platforms</span></div>
+        <div class="row is-gear"><span><span class="g">├─ </span><span class="f">pubspec.yaml</span></span><span class="note">app settings &amp; packages</span></div>
+        <div class="row"><span><span class="g">└─ </span><span class="f">README.md</span></span><span class="note">notes about the project</span></div>
+      </div>
+      <div class="facts stagger">
+        <div class="card fact">
+          <div class="itile"><svg class="ico"><use href="#i-star"/></svg></div>
+          <div><h3>lib/main.dart</h3><p>Where your app starts. You'll spend almost all your time inside <b>lib/</b>.</p></div>
+        </div>
+        <div class="card fact">
+          <div class="itile"><svg class="ico"><use href="#i-package"/></svg></div>
+          <div><h3>pubspec.yaml</h3><p>Your app's ID card: its name, version and the packages it uses.</p></div>
+        </div>
+        <div class="card fact">
+          <div class="itile"><svg class="ico"><use href="#i-folder"/></svg></div>
+          <div><h3>android/ · ios/ · web/</h3><p>Platform files Flutter manages for you. Leave them alone for now.</p></div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Open the project in VS Code and expand the folders as you talk.</p>
+    <p><code>lib/main.dart</code> is the only file we'll touch for the next few weeks. We'll come back to <code>pubspec.yaml</code> when we add packages.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     15 · Run it & hot reload
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Your first project</p>
+      <h2 class="title">Run it, then try hot reload</h2>
+    </header>
+    <div class="body run">
+      <ol class="steps stagger">
+        <li><span>Pick a device in the <b>bottom-right corner</b> of VS Code (or <b>Flutter: Select Device</b>)</span></li>
+        <li><span>Press <kbd>F5</kbd> to run. The <b>first run takes a few minutes</b>, and that's normal</span></li>
+        <li><span>Tap the <b>+</b> button a few times. The counter goes up</span></li>
+        <li><span>In <span class="path">lib/main.dart</span>, change <code>'Flutter Demo Home Page'</code> to your own title</span></li>
+        <li><span>Press <kbd>Ctrl</kbd> + <kbd>S</kbd>. The title changes <b>instantly</b>, and the counter keeps its number</span></li>
+      </ol>
+      <div class="phone-wrap" aria-hidden="true">
+        <div class="phone">
+          <span class="badge badge--warm reload-pill"><svg class="ico"><use href="#i-zap"/></svg>Hot reload</span>
+          <div class="phone__screen">
+            <div class="phone__island"></div>
+            <div class="app-top">
+              <div class="app-title"><span class="t-old">Flutter Demo Home Page</span><span class="t-new">My First App</span></div>
+            </div>
+            <div class="app-body">
+              <span>You have pushed the button this many times:</span>
+              <span class="app-count">3</span>
+            </div>
+            <div class="fab"><svg class="ico"><use href="#i-plus"/></svg></div>
+          </div>
+        </div>
+        <div class="term diff"><span class="del">- MyHomePage(title: 'Flutter Demo Home Page')</span><span class="add">+ MyHomePage(title: 'My First App')</span></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>Run it live on an emulator or Chrome. Warn students that the first Android build is slow because Gradle downloads its own tools. Later runs are much faster.</p>
+    <p>Then do the hot reload demo: change the title and save. Point out that the counter keeps its value. That's why it's called "stateful" hot reload.</p>
+  </aside>
+</section>
+
+<!-- =========================================================
+     16 · Wrap-up
+     ========================================================= -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Wrap-up</p>
+      <h2 class="title">Before next lecture</h2>
+    </header>
+    <div class="body wrap">
+      <article class="card">
+        <h3>Your checklist</h3>
+        <ul class="checklist stagger">
+          <li><span><code>flutter doctor</code> shows ✓ for <b>Flutter</b> and <b>Android toolchain</b></span></li>
+          <li><span>Create <span class="path">my_first_app</span> and run it</span></li>
+          <li><span>Change the title to your name using hot reload</span></li>
+          <li><span>Send a screenshot of your running app to the class group: <span class="todo">[class group link]</span></span></li>
+        </ul>
+        <div class="callout callout--ok" style="margin-top:1.6cqw;">
+          <svg class="ico"><use href="#i-users"/></svg>
+          <div><b>Stuck? Totally normal.</b> Come 15 minutes early with your laptop and we'll fix it together.</div>
+        </div>
+      </article>
+      <div class="qa">
+        <div class="qa__big grad-text">Questions?</div>
+        <div class="card next">
+          <h4>Next lecture</h4>
+          <p>Dart basics: the language behind Flutter</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 02</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes">
+    <p>The screenshots in the class group show you who is ready. Anyone without green ticks should come early next time.</p>
+    <p>Next lecture starts Dart, so everyone needs a working setup by then.</p>
+  </aside>
+</section>
+
+</main>
+
+<div class="notes-panel" hidden>
+  <h4 class="np-title">Speaker notes</h4>
+  <div class="np-body"></div>
+</div>
+<div class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen · <kbd>N</kbd> notes · <kbd>T</kbd> theme</div>
+
+<script src="js/deck.js"></script>
+</body>
+</html>
